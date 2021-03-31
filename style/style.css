@@ -72,62 +72,34 @@ form .login-link {
   color: red;
 }
 
-.container .signup-container {
+.row {
+  margin: 0;
+}
+
+.col-lg-6, .col-sm-12 {
+  padding: 0px;
+}
+
+.container .signup-container, .container .login-container {
   width: 100%;
 }
 
-.container .signup-container .left-column {
-  -webkit-box-flex: 30%;
-      -ms-flex: 30%;
-          flex: 30%;
+.container .signup-container .left-column, .container .login-container .left-column {
   background-color: #00aaff;
   padding: 60px 50px;
 }
 
-.container .signup-container .left-column div {
+.container .signup-container .left-column div, .container .login-container .left-column div {
   -webkit-box-flex: 50%;
       -ms-flex: 50%;
           flex: 50%;
 }
 
-.container .signup-container .left-column div * {
+.container .signup-container .left-column div *, .container .login-container .left-column div * {
   color: #fff;
 }
 
-.container .signup-container .right-column {
-  -webkit-box-flex: 70%;
-      -ms-flex: 70%;
-          flex: 70%;
-  background-color: #eee;
-  padding: 60px 100px;
-}
-
-.container .login-container {
-  width: 100%;
-}
-
-.container .login-container .left-column {
-  -webkit-box-flex: 30%;
-      -ms-flex: 30%;
-          flex: 30%;
-  background-color: #00aaff;
-  padding: 60px 50px;
-}
-
-.container .login-container .left-column div {
-  -webkit-box-flex: 50%;
-      -ms-flex: 50%;
-          flex: 50%;
-}
-
-.container .login-container .left-column div * {
-  color: #fff;
-}
-
-.container .login-container .right-column {
-  -webkit-box-flex: 70%;
-      -ms-flex: 70%;
-          flex: 70%;
+.container .signup-container .right-column, .container .login-container .right-column {
   background-color: #eee;
   padding: 60px 100px;
 }
@@ -175,7 +147,9 @@ form .login-link {
 }
 
 .dashboard-header1 .container .logout-and-admin {
-  margin-left: auto;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .dashboard-header1 .container .logout-and-admin a {
@@ -193,7 +167,9 @@ form .login-link {
 }
 
 .dashboard-header2 .files-creation {
-  margin-left: auto;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .dashboard-header2 .files-creation button {
@@ -201,6 +177,7 @@ form .login-link {
   color: #fff;
   background-color: #00aaff;
   padding: 10px 20px;
+  margin: 0px 5px;
 }
 
 .files-container {
@@ -216,10 +193,6 @@ form .login-link {
           box-shadow: 0px 0px 10px #8888;
 }
 
-.files-container .files-body table {
-  width: 100%;
-}
-
 .files-container .files-body table .contents-header {
   border-bottom: 1px solid #4d4d4f;
 }
@@ -229,30 +202,9 @@ form .login-link {
   text-decoration: none;
 }
 
-.files-container .files-body table tr {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .files-container .files-body table tr td {
   padding: 10px 20px;
-}
-
-.files-container .files-body table tr .file-name {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-flex: 30%;
-      -ms-flex: 30%;
-          flex: 30%;
+  border: none;
 }
 
 .files-container .files-body table tr .file-name .fa-folder {
@@ -260,61 +212,24 @@ form .login-link {
   color: #4d4d4f;
 }
 
-.files-container .files-body table tr .file-name span {
-  color: #00aaff;
-}
-
-.files-container .files-body table tr .file-name em {
+.files-container .files-body table tr .file-name p {
   font-size: 14px;
   color: #4d4d4f;
-}
-
-.files-container .files-body table tr .extension {
-  -webkit-box-flex: 30%;
-      -ms-flex: 30%;
-          flex: 30%;
-}
-
-.files-container .files-body table tr .date {
-  -webkit-box-flex: 30%;
-      -ms-flex: 30%;
-          flex: 30%;
+  font-style: italic;
 }
 
 .files-container .files-body table tr .manage {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-flex: 10%;
-      -ms-flex: 10%;
-          flex: 10%;
 }
 
-.files-container .files-body table tr .manage span {
-  border: 1px solid #4d4d4f;
-  padding: 2px 5px;
-  cursor: pointer;
+.files-container .files-body table tr .manage button {
+  margin: 0px 5px;
 }
 
 .files-container .files-body table tr:nth-child(even) {
   background-color: #eee;
-}
-
-.files-container .files-body .contents-body .file-name {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.files-container .files-body .contents-body .file-name em {
-  font-size: 12px;
-  color: #4d4d4f;
 }
 
 #createFolderModal .modal-dialog,
@@ -430,5 +345,47 @@ form .login-link {
 .footer p {
   color: #fff;
   margin-bottom: 0px;
+}
+
+@media (max-width: 990px) {
+  .dashboard-header1 .container h1 {
+    text-align: center;
+  }
+  .dashboard-header1 .container .logout-and-admin {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-top: 10px;
+  }
+  .dashboard-header2 .container h2 {
+    text-align: center;
+  }
+  .dashboard-header2 .container .files-creation {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-top: 10px;
+  }
+  .container .signup-container .right-column, .container .login-container .right-column {
+    padding: 60px 50px;
+  }
+  form .terms-and-conditions p {
+    margin: 5px 0 5px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  form .terms-and-conditions {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  form .terms-and-conditions p {
+    margin: 5px 0 0 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

@@ -28,7 +28,7 @@
       font-size: 25px;
     }
     .logout-and-admin {
-      margin-left: auto;
+      justify-content: flex-end;
       a {
         text-decoration: none;
         color: $white;
@@ -44,12 +44,13 @@
 .dashboard-header2 {
   padding: 20px 0px;
   .files-creation {
-    margin-left: auto;
+    justify-content: flex-end;
     button {
       border: none;
       color: $white;
       background-color: $blue;
       padding: 10px 20px;
+      margin: 0px 5px;
     }
   }
 }
@@ -63,7 +64,6 @@
     padding-right: 0px;
     box-shadow: 0px 0px 10px $shadowcolor;
     table {
-      width: 100%;
       .contents-header {
         border-bottom: 1px solid $darkGrey;
 
@@ -73,56 +73,29 @@
         }
       }
       tr {
-        display: flex;
-        align-items: center;
         td {
           padding: 10px 20px;
+          border: none;
         }
         .file-name {
-          display: flex;
-          flex-direction: column;
-          flex: 30%;
           .fa-folder {
             margin-right: 10px;
             color: $darkGrey;
           }
-          span {
-            color: $blue;
-          }
-          em {
+          p {
             font-size: 14px;
             color: $darkGrey;
+            font-style: italic;
           }
-        }
-        .extension {
-          flex: 30%;
-        }
-        .date {
-          flex: 30%;
         }
         .manage {
           display: flex;
-          justify-content: space-around;
-          flex: 10%;
-          span {
-            border: 1px solid $darkGrey;
-            padding: 2px 5px;
-            cursor: pointer;
+          button {
+            margin: 0px 5px;
           }
         }
         &:nth-child(even) {
           background-color: $lightGrey;
-        }
-      }
-    }
-
-    .contents-body {
-      .file-name {
-        display: flex;
-        flex-direction: column;
-        em {
-          font-size: 12px;
-          color: $darkGrey;
         }
       }
     }

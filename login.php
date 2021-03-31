@@ -21,9 +21,9 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<div class="container pt-5 pb-5 d-flex align-items-center">
-    <div class="login-container d-flex">
-        <div class="left-column d-flex flex-column">
+<div class="container pt-5 pb-5">
+    <div class="login-container row">
+        <div class="left-column col-lg-4 col-md-12">
             <div>
                 <h1 class="mb-4">Sign In</h1>
                 <p>Sign In with your username and password.</p>
@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
                 <p>Sign Up with your simple details, it will be cross checked by the adminstrator.</p>
             </div>
         </div>
-        <div class="right-column">
+        <div class="right-column col-lg-8 col-md-12">
             <form action="" method="POST">
                 <div class="form-field">
                     <label for="firstName">Username</label>

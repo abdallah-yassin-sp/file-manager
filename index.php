@@ -7,9 +7,9 @@ require_once('classes/UsersDB.php');
 
 ?>
 
-<div class="container pt-5 pb-5 d-flex align-items-center">
-    <div class="signup-container d-flex">
-        <div class="left-column d-flex flex-column">
+<div class="container pt-5 pb-5">
+    <div class="signup-container row">
+        <div class="left-column col-lg-4 col-md-12">
             <div>
                 <h1 class="mb-4">Sign Up</h1>
                 <p>Sign Up with your simple details, it will be cross checked by the adminstrator.</p>
@@ -19,7 +19,7 @@ require_once('classes/UsersDB.php');
                 <p>Sign In with your username and password.</p>
             </div>
         </div>
-        <div class="right-column">
+        <div class="right-column col-lg-8 col-md-12">
             <form action="classes/UsersDB.php" method="POST">
                 <div class="form-field">
                     <label for="firstName">First Name</label>
@@ -37,7 +37,7 @@ require_once('classes/UsersDB.php');
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="**********" required>
                 </div>
-                <div class="terms-and-conditions d-flex">
+                <div class="terms-and-conditions row">
                     <input type="checkbox" name="terms_and_conditions" id="terms_and_conditions">
                     <p>I agree with the terms and conditions</p>
                 </div>

@@ -1,0 +1,54 @@
+@media(max-width: 990px){
+    .dashboard-header1{
+        .container{
+            h1{
+                text-align: center;
+            }
+            .logout-and-admin{
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .dashboard-header2{
+        .container{
+            h2{
+                text-align: center;
+            }
+            .files-creation{
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    // sign up page
+    .container{
+        .signup-container,.login-container{
+            .right-column{
+                padding: 60px 50px;
+            }
+        }
+    }
+
+    form{
+        .terms-and-conditions{
+            p{
+                margin: 5px 0 5px 5px;
+            }
+        }
+    }
+}
+
+@media(max-width: 480px){
+    form{
+        .terms-and-conditions{
+            flex-direction: column;
+            align-items: flex-start;
+            p{
+                margin: 5px 0 0 0;
+            }
+        }
+    }
+}
