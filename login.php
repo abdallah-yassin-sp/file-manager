@@ -7,6 +7,13 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    if( empty($_POST["email"]) ){
+        $username_error = "Username is required !";
+    }
+    if( empty($_POST["password"]) ){
+        $password_error = "Password is required !";
+    }
+
     $usersJson = file_get_contents("classes/UsersData.json");
     $usersArray = json_decode($usersJson);
 
@@ -34,14 +41,16 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
         <div class="right-column col-lg-8 col-md-12">
-            <form action="" method="POST">
+            <form action="" method="POST" autocomplete="off">
                 <div class="form-field">
                     <label for="firstName">Username</label>
                     <input type="email" name="email" id="login-email" placeholder="example@fx.com" required>
+                    <span><?php if(isset($username_error)) echo $username_error ?></span>
                 </div>
                 <div class="form-field">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="**********" required>
+                    <span><?php if(isset($password_error)) echo $password_error ?></span>
                 </div>
                 <input type="submit" name="submit" value="Login">
                 <span>or</span>

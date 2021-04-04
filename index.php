@@ -1,9 +1,109 @@
 <?php
 require('header.php');
-require_once('classes/UsersDB.php');
+// require_once('classes/UsersDB.php');
 ?>
-
 <?php
+require_once('classes/UserFolder.php');
+$file_name = 'classes/UsersData.json';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    function get_data($user)
+    {
+        global $file_name;
+        $array_data = [];
+        if (file_exists($file_name)) {
+            $array_data = json_decode(file_get_contents($file_name), true);
+        }
+
+        $array_data[] = $user;
+        return $array_data;
+    }
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    $bool = true;
+    while( $bool ){
+
+        if (empty($_POST["firstName"])) {
+            $firstNameErr = "First Name is required";
+            $bool = false;
+            continue;
+        } else {
+            $firstName = test_input($_POST["firstName"]);
+            // check if name only contains letters and whitespace
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$firstName)) {
+                $firstNameErr = "Only letters and white space allowed";
+            }
+        }
+    
+        if (empty($_POST["lastName"])) {
+            $lastNameErr = "Last Name is required";
+            $bool = false;
+            continue;
+        } else {
+            $lastName = test_input($_POST["lastName"]);
+            // check if name only contains letters and whitespace
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$lastName)) {
+                $lastNameErr = "Only letters and white space allowed";
+            }
+        }
+        
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+            $bool = false;
+            continue;
+        } else {
+            $email = test_input($_POST["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                
+                $emailErr = "Invalid email format";
+                $bool = false;
+                continue;
+            }
+        }
+    
+        if (empty($_POST["password"])) {
+            $bool = false;
+            continue;
+            $passwordErr = "password is required";
+        } else {
+            $password = $_POST["password"];
+        }
+    
+        $user = array(
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        );
+    
+        $users = get_data($user);
+        $file_data = json_decode(file_get_contents($file_name), true);
+    
+        foreach( $file_data as $DBuser ){
+            if( $user["email"] == $DBuser["email"] ){
+                die("user exist !");
+            }
+        }
+    
+        if (!file_put_contents($file_name, json_encode($users))) {
+            echo 'There is some error';
+        }
+    
+        $newFolder = new UserFolder((object)$user);
+        $newFolder->create('');
+        break;
+    }
+
+
+    header('location: login.php');
+}
 
 ?>
 
@@ -20,22 +120,26 @@ require_once('classes/UsersDB.php');
             </div>
         </div>
         <div class="right-column col-lg-8 col-md-12">
-            <form action="classes/UsersDB.php" method="POST">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" autocomplete="off">
                 <div class="form-field">
                     <label for="firstName">First Name</label>
                     <input type="text" name="firstName" id="firstName" placeholder="John" required>
+                    <span><?php echo $firstNameErr;?></span>
                 </div>
                 <div class="form-field">
                     <label for="lastName">Last Name</label>
                     <input type="text" name="lastName" id="lastName" placeholder="Doe" required>
+                    <span><?php echo $lastNameErr;?></span>
                 </div>
                 <div class="form-field">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="example@fx.com" required>
+                    <input type="email" name="email" id="email" placeholder="example@example.com" required>
+                    <span><?php echo $emailErr;?></span>
                 </div>
                 <div class="form-field">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="**********" required>
+                    <span><?php echo $passwordErr;?></span>
                 </div>
                 <div class="terms-and-conditions row">
                     <input type="checkbox" name="terms_and_conditions" id="terms_and_conditions">

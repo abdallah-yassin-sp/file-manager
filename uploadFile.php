@@ -5,7 +5,7 @@ require('classes/UserFolder.php');
 require_once('classes/File.php');
 
 $user = $_SESSION['user'];
-$current_path = $_SESSION['folder_path'];
+$current_path = $_SESSION['folder_path'] . $_GET['path'];
 
 if (isset($_FILES['file'])) {
     $file = $_FILES['file'];
@@ -14,4 +14,6 @@ if (isset($_FILES['file'])) {
 
     $new_file = new File($user);
     $new_file->upload($file, $current_path, $file_name);
+
+    header("location: dashboard.php?path={$_GET['path']}");
 }

@@ -15,39 +15,44 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['folder_path'] = "directories/{$user->email}";
     $new_path = $_GET['path'] ?? "";
     $directory = "directories/{$user->email}/{$new_path}";
+    $_SESSION['directory'] = $directory;
 ?>
 
     <div class="dashboard-header1">
-        <div class="container row m-auto">
-            <h1 class="col-lg-6 col-sm-12">File Management System</h1>
-            <div class="logout-and-admin d-flex col-lg-6 col-sm-12">
-                <a href="logout.php" class="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                <a href="#" class="admin"><i class="fas fa-user"></i>Admin</a>
+        <div class="container">
+            <div class="row m-auto">
+                <h1 class="col-lg-6 col-sm-12">File Management System</h1>
+                <div class="logout-and-admin d-flex col-lg-6 col-sm-12">
+                    <a href="logout.php" class="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                    <a href="#" class="admin"><i class="fas fa-user"></i>Admin</a>
+                </div>
             </div>
         </div>
     </div>
     <div class="dashboard-header2">
-        <div class="container row m-auto">
-            <h2 class="col-lg-6 col-sm-12">File Manager</h2>
-            <div class="files-creation d-flex col-lg-6 col-sm-12">
-                <button type="button" data-toggle="modal" data-target="#createFolderModal">Create Folder</button>
-                <button type="button" data-toggle="modal" data-target="#uploadFileModal">Upload File</button>
-                <div class="modal fade" id="createFolderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="modal-title-and-close">
-                                    <h5 class="modal-title" id="exampleModalLabel">Create Folder</h5>
-                                    <span type="button" data-dismiss="modal">&#10005;</span>
-                                </div>
-                                <form action="createFolder.php" method="POST" class="create-folder-form">
-                                    <input type="hidden" name="path" value="<?= $new_path ?>">
-                                    <input type="text" name="folderName" id="folderName">
-                                    <div class="create-folder-form-buttons">
-                                        <button type="button" data-dismiss="modal">Cancel</button>
-                                        <input type="submit" name="crete-folder-submit" value="Create"></input>
+        <div class="container">
+            <div class="row m-auto">
+                <h2 class="col-lg-6 col-sm-12">File Manager</h2>
+                <div class="files-creation d-flex col-lg-6 col-sm-12">
+                    <button type="button" data-toggle="modal" data-target="#createFolderModal">Create Folder</button>
+                    <button type="button" data-toggle="modal" data-target="#uploadFileModal">Upload File</button>
+                    <div class="modal fade" id="createFolderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="modal-title-and-close">
+                                        <h5 class="modal-title" id="exampleModalLabel">Create Folder</h5>
+                                        <span type="button" data-dismiss="modal">&#10005;</span>
                                     </div>
-                                </form>
+                                    <form action="createFolder.php" method="POST" class="create-folder-form">
+                                        <input type="hidden" name="path" value="<?= $new_path ?>">
+                                        <input type="text" name="folderName" id="folderName">
+                                        <div class="create-folder-form-buttons">
+                                            <button type="button" data-dismiss="modal">Cancel</button>
+                                            <input type="submit" name="crete-folder-submit" value="Create"></input>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +65,7 @@ if (!isset($_SESSION['user'])) {
                                     <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
                                     <span type="button" data-dismiss="modal">&#10005;</span>
                                 </div>
-                                <form action="uploadFile.php" method="POST" enctype="multipart/form-data" class="upload-file-form">
+                                <form action="uploadFile.php?path=<?php echo $new_path ?>" method="POST" enctype="multipart/form-data" class="upload-file-form">
                                     <input type="file" name="file" id="file">
                                     <div class="upload-file-form-buttons">
                                         <button type="button" data-dismiss="modal">Cancel</button>
@@ -89,7 +94,7 @@ if (!isset($_SESSION['user'])) {
                 $dh = opendir('.');
                 while ($file = readdir($dh)) {
                     if ($file != "." && $file != "..") { ?>
-                        <tr id="soso">
+                        <tr>
                             <td class="file-name">
                                 <?php
                                 if (filetype($file) === 'dir') { ?>

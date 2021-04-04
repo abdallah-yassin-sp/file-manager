@@ -5,13 +5,12 @@ $user = $_SESSION['user'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fileName = $_POST['fileName'];
     $path = trim($_POST['path'], "/");
-    $full_path = "{$path}{$fileName}";
+    $full_path = "{$path}/{$fileName}";
 
     // var_dump($fileName);
     // var_dump($path);
     // var_dump($full_path);
     // var_dump($_POST);
-    // var_dump($user->firstName);
     // die();
 
     $newFolder = new UserFolder($user);
