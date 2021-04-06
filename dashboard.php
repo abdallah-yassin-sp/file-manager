@@ -16,10 +16,10 @@ if (!isset($_SESSION['user'])) {
     $new_path = $_GET['path'] ?? "";
     $directory = "directories/{$user->email}/{$new_path}";
     $real_directory = realpath($directory);
+    
     $real_directory = explode('/', $real_directory);
-    $lastPart = array_pop($real_directory);
-    if($lastPart == "directories"){
-        die("<span class=\"error\">Access denied</span>");
+    if(! array_search("{$user->email}", $real_directory) ){
+        die("<h1 class=\"error\">Access denied</h1>");
     }
     $_SESSION['directory'] = $directory;
 ?>
