@@ -5,7 +5,7 @@ require('classes/UserFolder.php');
 require_once('classes/File.php');
 
 $user = $_SESSION['user'];
-$current_path = $_SESSION['folder_path'] . $_GET['path'];
+$current_path = $_SESSION['folder_path'] . "/" . $_GET['path'] . "/";
 
 if (isset($_FILES['file'])) {
     $file = $_FILES['file'];

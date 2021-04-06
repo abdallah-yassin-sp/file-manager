@@ -1,3 +1,18 @@
+html, body {
+  height: 100%;
+}
+
+.website-container {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 h1,
 h2,
 h3,
@@ -69,7 +84,7 @@ form .login-link {
 }
 
 .fa-trash-alt {
-  color: red;
+  color: #ff0000;
 }
 
 .row {
@@ -78,6 +93,12 @@ form .login-link {
 
 .col-lg-6, .col-sm-12 {
   padding: 0px;
+}
+
+.error {
+  color: #fff;
+  background-color: #ff0000;
+  margin-top: 5px;
 }
 
 .container .signup-container, .container .login-container {
@@ -183,6 +204,9 @@ form .login-link {
 .files-container {
   background-color: #eee;
   padding: 20px 0px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 .files-container .files-body {
@@ -203,7 +227,7 @@ form .login-link {
 }
 
 .files-container .files-body table tr td {
-  padding: 10px 20px;
+  padding: 10px 15px;
   border: none;
 }
 
@@ -216,6 +240,7 @@ form .login-link {
   font-size: 14px;
   color: #4d4d4f;
   font-style: italic;
+  margin-bottom: 0px;
 }
 
 .files-container .files-body table tr .manage {

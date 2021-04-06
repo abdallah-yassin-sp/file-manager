@@ -15,6 +15,12 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['folder_path'] = "directories/{$user->email}";
     $new_path = $_GET['path'] ?? "";
     $directory = "directories/{$user->email}/{$new_path}";
+    $real_directory = realpath($directory);
+    $real_directory = explode('/', $real_directory);
+    $lastPart = array_pop($real_directory);
+    if($lastPart == "directories"){
+        die("<span class=\"error\">Access denied</span>");
+    }
     $_SESSION['directory'] = $directory;
 ?>
 
@@ -93,7 +99,9 @@ if (!isset($_SESSION['user'])) {
                 chdir($directory);
                 $dh = opendir('.');
                 while ($file = readdir($dh)) {
-                    if ($file != "." && $file != "..") { ?>
+                    
+                    if ($file != "." && $file != "..") {
+                ?>
                         <tr>
                             <td class="file-name">
                                 <?php
@@ -123,20 +131,20 @@ if (!isset($_SESSION['user'])) {
                             </td>
                             <td class="manage">
                                 <?php
-                                if(is_dir($file)){?>
-                                <form action="deleteFile.php" method="POST">
-                                    <input type="hidden" name="path" value="<?= $new_path ?>">
-                                    <input type="hidden" name="fileName" value="<?php echo $file ?>">
-                                    <button type="submit" name="deleteFile" class="delete"><i class="far fa-trash-alt"></i></button>
-                                </form>
-                                <?php 
-                                }else{?>
-                                <button class="view" data-toggle="modal" data-target="#view-file-modal" data-file="<?php echo $file ?>"><i class="fas fa-eye"></i></button>
-                                <form action="deleteFile.php" method="POST">
-                                    <input type="hidden" name="path" value="<?= $new_path ?>">
-                                    <input type="hidden" name="fileName" value="<?php echo $file ?>">
-                                    <button type="submit" name="deleteFile" class="delete"><i class="far fa-trash-alt"></i></button>
-                                </form>
+                                if (is_dir($file)) { ?>
+                                    <form action="deleteFile.php" method="POST">
+                                        <input type="hidden" name="path" value="<?= $new_path ?>">
+                                        <input type="hidden" name="fileName" value="<?php echo $file ?>">
+                                        <button type="submit" name="deleteFile" class="delete"><i class="far fa-trash-alt"></i></button>
+                                    </form>
+                                <?php
+                                } else { ?>
+                                    <button class="view" data-toggle="modal" data-target="#view-file-modal" data-file="<?php echo $file ?>"><i class="fas fa-eye"></i></button>
+                                    <form action="deleteFile.php" method="POST">
+                                        <input type="hidden" name="path" value="<?= $new_path ?>">
+                                        <input type="hidden" name="fileName" value="<?php echo $file ?>">
+                                        <button type="submit" name="deleteFile" class="delete"><i class="far fa-trash-alt"></i></button>
+                                    </form>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -173,7 +181,7 @@ if (!isset($_SESSION['user'])) {
             jQuery("#view-Item-modal-iframe").attr("src", dir + "/" + fileName);
         });
 
-        jQuery("#view-Item-modal-iframe").on('load', function () {
+        jQuery("#view-Item-modal-iframe").on('load', function() {
             jQuery("#view-Item-modal-iframe").contents().find("body").css("display", "flex");
             jQuery("#view-Item-modal-iframe").contents().find("body").css("align-items", "center");
             jQuery("#view-Item-modal-iframe").contents().find("img").css("width", "100%");
@@ -181,5 +189,10 @@ if (!isset($_SESSION['user'])) {
         });
     });
 </script>
+
+<?php
+
+
+?>
 
 <?php require('footer.php'); ?>
