@@ -101,6 +101,12 @@ form .login-link {
   margin-top: 5px;
 }
 
+.container {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
 .container .signup-container, .container .login-container {
   width: 100%;
 }

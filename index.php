@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // check if name only contains letters and whitespace
         if (!preg_match("/^[a-zA-Z-' ]*$/", $firstName)) {
             $firstNameErr = "Only letters and white space allowed";
-        }
-        else{
+        } else {
             $firstNameErr = "";
         }
     }
@@ -35,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // check if name only contains letters and whitespace
         if (!preg_match("/^[a-zA-Z-' ]*$/", $lastName)) {
             $lastNameErr = "Only letters and white space allowed";
-        }
-        else{
+        } else {
             $lastNameErr = "";
         }
     }
@@ -48,8 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // check if e-mail address is well-formed
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailErr = "Invalid email format";
-        }
-        else{
+        } else {
             $emailErr = "";
         }
     }
@@ -125,33 +122,31 @@ function get_data($user)
     return $array_data;
 }
 
-if(isset($_POST['submit']))
-{
-    if($firstNameErr == "" && $lastNameErr == "" && $emailErr == "" && $passwordErr =="")
-    {
+if (isset($_POST['submit'])) {
+    if ($firstNameErr == "" && $lastNameErr == "" && $emailErr == "" && $passwordErr == "") {
         $user = array(
             'firstName' => $firstName,
             'lastName' => $lastName,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT)
         );
-        
+
         $users = get_data($user);
         $file_data = json_decode(file_get_contents($file_name), true);
-        
+
         foreach ($file_data as $DBuser) {
             if ($user["email"] == $DBuser["email"]) {
                 die("user exist !");
             }
         }
-        
+
         if (!file_put_contents($file_name, json_encode($users))) {
             echo 'There is some error';
         }
-        
+
         $newFolder = new UserFolder((object)$user);
         $newFolder->create('');
-        
+
         header('location: login.php');
     }
 }
