@@ -16,7 +16,6 @@ if (!isset($_SESSION['user'])) {
     $new_path = $_GET['path'] ?? "";
     $directory = "directories/{$user->email}/{$new_path}";
     $real_directory = realpath($directory);
-
     $real_directory = explode('/', $real_directory);
     if (!array_search("{$user->email}", $real_directory)) {
         die("<h1 class=\"error\">Access denied</h1>");
