@@ -1,8 +1,5 @@
 <?php
 require('header.php');
-?>
-
-<?php
 if (!isset($_SESSION['user'])) {
 ?>
     <div class="container error-message">

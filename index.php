@@ -1,8 +1,5 @@
 <?php
 require('header.php');
-// require_once('classes/UsersDB.php');
-?>
-<?php
 require_once('classes/UserFolder.php');
 $file_name = 'classes/UsersData.json';
 
